@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-
+const db = require('./config/mongoose');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static('./assets'));
-
+app.use(express.urlencoded());
 // View Engine
 app.set('view engine','ejs');
 app.set('views','./views');
