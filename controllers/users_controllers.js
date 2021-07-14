@@ -1,7 +1,12 @@
 const User = require('../models/user');
 
-module.exports.createSession = function(req,res) {
+module.exports.createSession = function(req, res){
+    return res.redirect('/');
+}
 
+module.exports.destroySession = function(req, res){
+    req.logout();
+    return res.redirect('/');
 }
 
 module.exports.create = function(req,res) {
