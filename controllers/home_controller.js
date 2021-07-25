@@ -1,3 +1,5 @@
+const Product = require('../models/product');
+
 module.exports.home = function(req, res){
     
     return res.render('index', {
@@ -30,9 +32,17 @@ module.exports.contact = function(req,res) {
     return res.render('contact');
 }
 
-module.exports.products = function(req,res) {
-    return res.render('products');
-}
+module.exports.products = (req,res) => {
+    // chunkSize specifies max number of elements in a row
+    Product.find( (err,docs) => {
+        var productChunks = [];
+        var chunkSize = 3;
+        for (var i=0;i<docs.length;i++) {
+            productChunks.push(docs.slice(i,i+chunkSize));
+        }
+        res.render('products',  {products: productChunks});
+    })
+} 
 
 module.exports.terms = function(req,res) {
     return res.render('terms');
