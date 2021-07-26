@@ -1,16 +1,23 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 const app = express();
 const db = require('./config/mongoose');
+
+// Connect db
+db();
+
 
 // For passport
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport_local');
 // for cookies to db
-const MongoStore = require('connect-mongo')(session);    
+const MongoStore = require('connect-mongo');    
 
 const PORT = process.env.PORT || 3000;
+
+dotenv.config({path: './config/config.env'});
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded());
@@ -18,7 +25,6 @@ app.use(cookieParser());
 // View Engine
 app.set('view engine','ejs');
 app.set('views','./views');
-
 
 // middleware for encrypting cookie
 app.use(session({
@@ -31,8 +37,8 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     // Adding mongostore to store cookie in db
-    store: new MongoStore({
-        mongooseConnection: db,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
         
     }, function(err) {
         if (err) {console.log('error in connecting to db')}

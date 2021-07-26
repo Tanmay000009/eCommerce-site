@@ -1,8 +1,12 @@
+const dotenv = require('dotenv');
+
+dotenv.config({path: '../config/config.env'});
+
 const Product = require("../models/product");
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/ecommercee");
+mongoose.connect(process.env.MONGO_URI);
 
 const db = mongoose.connection;
 
