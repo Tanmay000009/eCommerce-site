@@ -18,6 +18,8 @@ router.get('/terms', homeController.terms);
 router.get('/testimonials', homeController.testimonials);
 router.get('/login', homeController.login);
 
+router.post('/cart/add/:id',homeController.cartAdd);
+
 router.use('/users', require('./users'));
 
 // for any further routes, access from here

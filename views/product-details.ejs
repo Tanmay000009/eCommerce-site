@@ -115,7 +115,6 @@
           </div>
 
           <div class="col-md-8 col-xs-12">
-            <form action="#" method="post" class="form">
               <h2><%= product.name %></h2>
 
               <br>
@@ -138,18 +137,22 @@
 
                   <div class="row">
                     <div class="col-sm-6">
+
+                  <form action="/cart/add/<%= product._id %>" method="post">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="1">
+                        <input type="text" name="quantity" class="form-control" placeholder="1">
                       </div>
                     </div>
 
                     <div class="col-sm-6">
-                      <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                      <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
                     </div>
+                  </form>
+
+
                   </div>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>

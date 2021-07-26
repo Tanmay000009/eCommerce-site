@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const User = require('../models/user');
 
 module.exports.home = function(req, res){
     
@@ -63,3 +64,19 @@ module.exports.login = function(req,res) {
     }
     return res.render('login');
 }
+
+module.exports.cartAdd = async function(req,res) {
+    if (req.isAuthenticated()){
+
+        let user = await User.findByIdAndUpdate({_id : req.user._id},{ $push: { cart: req.params.id } },function(err, result) {
+            if (err) {
+                console.log('Error',err);
+              res.redirect('back');
+            } else {
+              res.redirect('/checkout');
+            }
+          })
+    } else {
+        return res.render('login');
+    }
+    }
