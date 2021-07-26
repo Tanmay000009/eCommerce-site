@@ -10,7 +10,7 @@ router.get('/', homeController.home);
 router.get('/about', homeController.about);
 router.get('/blogDetails', homeController.blogDetails);
 router.get('/blog', homeController.blog);
-router.get('/productDetails', homeController.productDetails);
+router.get('/productDetails/:id', homeController.productDetails);
 router.get('/checkout', homeController.checkout);
 router.get('/contact', homeController.contact);
 router.get('/products', homeController.products);

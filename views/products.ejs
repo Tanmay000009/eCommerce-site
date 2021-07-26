@@ -7,19 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="icon" href="/assets/images/favicon.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>PHPJabbers.com | Free Online Store Website Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/owl.css">
 
   </head>
 
@@ -64,12 +64,12 @@
                     </div>
                 </li>
                 
-                <li class="nav-item"><a class="nav-link" href="checkout">Checkout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/checkout">Checkout</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="contact">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
                 <% if (locals.user) {%> 
                   <li class="nav-item"><a class="nav-link" href="/users/logout">
-                    <img src='./assets/images/user.png' alt="">
+                    <img src='/assets/images/user.png' alt="">
                     <span>
                       Logout
                     </span>
@@ -77,7 +77,7 @@
 
                   <% } else {%>
                 <li class="nav-item"><a class="nav-link" href="/login">
-                  <img src='./assets/images/user.png' alt="">
+                  <img src='/assets/images/user.png' alt="">
                   <span>
                     Login
                   </span>
@@ -90,7 +90,7 @@
     </header>
 
     <!-- Page Content -->
-    <div class="page-heading about-heading header-text" style="background-image: url(assets/images/heading-6-1920x500.jpg);">
+    <div class="page-heading about-heading header-text" style="background-image: url(/assets/images/heading-6-1920x500.jpg);">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -111,9 +111,9 @@
           <% for (var i=0;i<products.length;i++) {%>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="/productDetails"><img src="<%= products[i].imgpath %>" alt=""></a>
+              <a href="/productDetails/<%= products[i]._id %>"><img src="/<%= products[i].imgpath %>" alt=""></a>
               <div class="down-content">
-                <a href="/productDetails"><h4><%= products[i].name %></h4></a>
+                <a href="/productDetails/<%= products[i]._id %>"><h4><%= products[i].name %></h4></a>
                 <h6><%= products[i].price %></h6>
                 <p><%= products[i].desc %></p>
               </div>
@@ -215,13 +215,13 @@
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Additional Scripts -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/owl.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/owl.js"></script>
   </body>
 
 </html>

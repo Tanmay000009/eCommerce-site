@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('./assets'));
+app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded());
 app.use(cookieParser());
 // View Engine

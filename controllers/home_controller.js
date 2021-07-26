@@ -20,8 +20,16 @@ module.exports.blog = function(req,res) {
     return res.render('blog');
 }
 
-module.exports.productDetails = function(req,res) {
-    return res.render('product-details');
+module.exports.productDetails = async function(req,res) {
+    var id = req.params.id;
+    console.log(req.params.id);
+    await Product.findOne({_id : id}, function (err,product) {
+        if (err) {
+            console.log('Err : ',err);
+            return res.redirect('back');
+        }
+        return res.render('product-details',{product : product});
+    }).exec();
 }
 
 module.exports.checkout = function(req,res) {
