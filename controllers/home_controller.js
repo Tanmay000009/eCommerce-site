@@ -35,12 +35,10 @@ module.exports.contact = function(req,res) {
 module.exports.products = (req,res) => {
     // chunkSize specifies max number of elements in a row
     Product.find( (err,docs) => {
-        var productChunks = [];
-        var chunkSize = 3;
-        for (var i=0;i<docs.length;i++) {
-            productChunks.push(docs.slice(i,i+chunkSize));
+        if (err) {
+            res.redirect('back');
         }
-        res.render('products',  {products: productChunks});
+        res.render('products',  {products: docs});
     })
 } 
 
