@@ -17,7 +17,7 @@ const MongoStore = require('connect-mongo');
 
 const PORT = process.env.PORT || 3000;
 
-dotenv.config({path: './config/config.env'});
+dotenv.config({path: 'config.env'});
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded());
