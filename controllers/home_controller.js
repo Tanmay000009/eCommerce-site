@@ -23,16 +23,43 @@ module.exports.blog = function (req, res) {
 module.exports.productDetails = async function (req, res) {
   try {
     var id = req.params.id;
-    let product = await Product.findOne({ _id: id })
-      return res.render("product-details", { product: product });
+    let product = await Product.findOne({ _id: id });
+    return res.render("product-details", { product: product });
   } catch (err) {
     console.log("Err in finding products -> productDetails ", err);
     return res.redirect("back");
   }
 };
 
-module.exports.checkout = function (req, res) {
-  return res.render("checkout");
+module.exports.checkout = async function (req, res) {
+    try {
+        if (req.isAuthenticated()) {
+          var id = req.user._id;
+          let user = await User.findOne({ _id: id });
+            var prodDetails = [];
+        var total=0;
+        var temp;
+          for (var i=0;i<user.cart.length;i++) {
+            try {
+                var id = user.cart[i];
+                let product = await Product.findOne({ _id: id });
+                temp = product.price.slice(1,);
+                total += Number(temp);
+                prodDetails.push(product);
+              } catch (err) {
+                console.log("Err in finding products -> cart ", err);
+                return res.redirect("back");
+              }
+          }
+    
+          return res.render("checkout", { cart: prodDetails, total : total });
+        } else {
+          return res.render("login");
+        }
+      } catch (err) {
+        console.log("Err in finding user -> cart ", err);
+        return res.redirect("back");
+      }
 };
 
 module.exports.contact = function (req, res) {
@@ -55,10 +82,6 @@ module.exports.terms = function (req, res) {
 
 module.exports.testimonials = function (req, res) {
   return res.render("testimonials");
-};
-
-module.exports.cart = function (req, res) {
-  return res.render("cart");
 };
 
 module.exports.login = function (req, res) {

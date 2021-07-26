@@ -17,7 +17,6 @@ router.get('/products', homeController.products);
 router.get('/terms', homeController.terms);
 router.get('/testimonials', homeController.testimonials);
 router.get('/login', homeController.login);
-router.get('/cart',homeController.cart);
 
 router.post('/cart/add/:id',homeController.cartAdd);
 
