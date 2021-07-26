@@ -108,7 +108,7 @@
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div>
-              <img src="/assets/images/product-1-370x270.jpg" alt="" class="img-fluid wc-image">
+              <img src="/<%= product.imgpath %>" alt="" class="img-fluid wc-image">
             </div>
             <br>
             
@@ -116,18 +116,18 @@
 
           <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>Lorem ipsum dolor sit amet.</h2>
+              <h2><%= product.name %></h2>
 
               <br>
 
               <p class="lead">
-                <strong class="text-primary">$779.00</strong>
+                <strong class="text-primary"><%= product.price %></strong>
               </p>
 
               <br>
 
               <p class="lead">
-                 product.desc
+                <%= product.desc %>
               </p>
 
               <br> 
