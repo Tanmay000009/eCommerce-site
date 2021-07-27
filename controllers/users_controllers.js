@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const Cart = require('../models/cart');
 
 module.exports.createSession = function(req, res){
     return res.redirect('/');

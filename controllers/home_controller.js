@@ -102,6 +102,8 @@ module.exports.login = function (req, res) {
 
 module.exports.cartAdd = async function (req, res) {
   var productId = req.params.id;
+  var quantity = req.body.quantity;
+  
   try {
     if (req.isAuthenticated()) {
       let user = await User.findById(
@@ -112,10 +114,11 @@ module.exports.cartAdd = async function (req, res) {
         var count = user.count;
         if (cart.includes(productId)) {
           var i = cart.findIndex(product => product === productId);
-          count[i]++;
+          count[i] = Number(count[i]) + Number(quantity);
+          console.log(count[i]);
         } else {
           cart.push(productId);
-          count.push(1);
+          count.push(Number(quantity));
         }
         user.cart = cart;
         user.count = count;
