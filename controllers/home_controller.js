@@ -2,9 +2,13 @@ const Product = require("../models/product");
 const User = require("../models/user");
 
 module.exports.home = function (req, res) {
-  return res.render("index", {
-    title: "Home",
-    user: req.user,
+  Product.find((err, docs) => {
+    if (err) {
+      console.log("Error in getting products -> homeProducts",err);
+      res.redirect("back");
+    }
+    res.render("index", { title: "Home",
+    user: req.user,products: docs });
   });
 };
 
@@ -37,6 +41,7 @@ module.exports.checkout = async function (req, res) {
           var id = req.user._id;
           let user = await User.findOne({ _id: id });
             var prodDetails = [];
+            var totalCount=0;
         var total=0;
         var temp;
           for (var i=0;i<user.cart.length;i++) {
@@ -44,15 +49,19 @@ module.exports.checkout = async function (req, res) {
                 var id = user.cart[i];
                 let product = await Product.findOne({ _id: id });
                 temp = product.price.slice(1,);
-                total += Number(temp);
+                total += (Number(temp)*user.count[i]);
+                totalCount += (1*user.count[i]);
+                product.itemPrice = (Number(temp)*user.count[i]);
+                product.count = user.count[i];
                 prodDetails.push(product);
+                
               } catch (err) {
                 console.log("Err in finding products -> cart ", err);
                 return res.redirect("back");
               }
           }
     
-          return res.render("checkout", { cart: prodDetails, total : total });
+          return res.render("checkout", { cart: prodDetails, total : total,totalCount : totalCount });
         } else {
           return res.render("login");
         }
@@ -92,15 +101,33 @@ module.exports.login = function (req, res) {
 };
 
 module.exports.cartAdd = async function (req, res) {
+  var productId = req.params.id;
   try {
     if (req.isAuthenticated()) {
-      let user = await User.findByIdAndUpdate(
-        { _id: req.user._id },
-        { $push: { cart: req.params.id } }
+      let user = await User.findById(
+        { _id: req.user._id }
       );
       if (user) {
+        var cart = user.cart;
+        var count = user.count;
+        if (cart.includes(productId)) {
+          var i = cart.findIndex(product => product === productId);
+          count[i]++;
+        } else {
+          cart.push(productId);
+          count.push(1);
+        }
+        user.cart = cart;
+        user.count = count;
+        user.save();
         res.redirect("back");
       }
+      // id = req.user._id;
+      // let cart = await Cart.findById({id : id});
+      // var temp = cart.items[0];
+      // temp.id = {name: "abc", qty: 0,price : 0};
+      // cart.items[0] = temp;
+      // cart.save();
     } else {
       return res.render("login");
     }

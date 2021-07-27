@@ -2,11 +2,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
+const sassMiddleware = require('node-sass-middleware');
 const db = require('./config/mongoose');
 
 // Connect db
 db();
-
 
 // For passport
 const session = require('express-session');

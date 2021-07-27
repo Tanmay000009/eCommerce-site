@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Cart = require('../models/cart');
 
 module.exports.createSession = function(req, res){
     return res.redirect('/');
@@ -24,7 +25,7 @@ module.exports.create = function(req,res) {
         }
         User.create(req.body, function(err, user){
             if(err){req.flash('error', err); return}
-
+            
             return res.render('login');
         })
     })

@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    cart: [String]
+    cart: [String],
+    count: [String]
 }, {
     timestamps: true
 })
